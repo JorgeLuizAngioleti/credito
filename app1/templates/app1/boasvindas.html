@@ -1,6 +1,13 @@
 {% extends 'app1/base.html' %}
 {% load crispy_forms_tags %}
 {% block conteudo %}
-<a href="{% url 'register' %}" class="btn btn-success">Home</a>
+{% if user.is_authenticated  %}<!-- if 1-->
+<h4>Olá {{ user.username }}!</h4>
+<a href="{% url 'register' %}" class="btn btn-success">simular crédito</a>
+<a href="{% url 'logout' %}" class="btn btn-success">Logout</a>
+{%else%}
+<a href="{% url 'login' %}" class="btn btn-success">Login</a>
+{%endif%}
+
 
 {% endblock %}

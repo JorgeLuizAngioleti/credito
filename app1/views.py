@@ -1,10 +1,11 @@
 from django.shortcuts import render, redirect
 from django.db.models import Sum
-from .models import Entrada, Saida, Cliente
+from .models import Entrada, Saida
 from .forms import EntradaForm, SaidaForm, NewUserForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth import login
+from django.contrib.auth import logout
 def home(request):
     context={}
     tudo_ent = Entrada.objects.all()
@@ -29,6 +30,10 @@ def boasvindas(request):
 def capa(request):
     context = {}
     return render(request, 'app1/index.html', context)
+
+def logout1(request):
+    logout(request)
+    return redirect('url_boasvindas')
 
 @login_required
 def AddEntrada(request):

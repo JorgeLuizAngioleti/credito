@@ -1,20 +1,20 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import  Entrada, Saida, Cliente
-class NewUserForm(UserCreationForm):
-	email = forms.EmailField(required=True)
+from .models import  Entrada, Saida, User
+from django.forms import ModelForm
+class NewUserForm(ModelForm):
+    class Meta:
+        model = User
+        fields = ['username','password','first_name','last_name','cpf','idade', 'nome']
 
-	class Meta:
-		model = User
-		fields = ("username", "email", "password1", "password2")
-
-	def save(self, commit=True):
-		user = super(NewUserForm, self).save(commit=False)
-		user.email = self.cleaned_data['email']
-		if commit:
-			user.save()
-		return user
+        def save(self, commit=True):
+            # Save the provided password in hashed format
+            user = super(UserForm, self).save(commit=False)
+            user.set_password(self.cleaned_data["password"])
+            if commit:
+                user.save()
+            return user
 
 class EntradaForm(forms.ModelForm):
 

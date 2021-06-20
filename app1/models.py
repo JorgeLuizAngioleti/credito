@@ -1,7 +1,8 @@
 from django.db import models
 from django.utils import timezone
 from cpf_field.models import CPFField
-
+from django.contrib.auth.models import AbstractUser
+from django.conf import settings
 # Create your models here.
 class Entrada(models.Model):
     nome = models.CharField(u'Gastos de entrada',max_length=150)
@@ -19,9 +20,12 @@ class Saida(models.Model):
 
     def __str__(self):
         return self.nome
-class Cliente(models.Model):
+
+class User(AbstractUser):
     nome = models.CharField(u'Nome completo', max_length=50)
-    idade = models.IntegerField(u'Idade',max_length=3)
+    idade = models.IntegerField()
     cpf = CPFField('cpf')
-    def __str__(self):
-        return self.nome
+    birth_date = models.DateField(null=True, blank=True)
+    #esc = models.ForeignKey(Escola, on_delete=models.CASCADE)
+    #per1 = models.BooleanField(u'Permição 1',default=False)
+

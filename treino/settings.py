@@ -31,7 +31,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'cpf_field',
 ]
-
+AUTH_USER_MODEL = 'app1.User'#registro aqui
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -110,5 +110,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 LOGIN_REDIRECT_URL='url_entrada'
+LOGOUT_REDIRECT_URL = '/' # new
 STATIC_URL = '/static/'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
