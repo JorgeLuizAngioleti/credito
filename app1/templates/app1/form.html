@@ -1,0 +1,14 @@
+{% extends 'app1/base.html' %}
+{% load crispy_forms_tags %}
+{% block conteudo %}
+<center><h2>{{identificacao}}</h2></center>
+{% if user.is_authenticated  %}<!-- if 1-->
+<h4>Olá {{ user.username }}!</h4>
+{%endif%}
+<form method="post">
+    {%csrf_token%}
+    {{form|crispy}}
+    <input type="submit" value="Enviar" class="btn btn-primary">
+    <a href="{% url 'url_home' %}" class="btn btn-warning">Voltar</a>
+</form>
+{%endblock%}

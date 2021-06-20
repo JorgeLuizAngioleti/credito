@@ -1,0 +1,59 @@
+{% extends 'app1/base.html' %}
+{% load crispy_forms_tags %}
+{% block conteudo %}
+<a href="{% url 'url_entrada' %}" class="btn btn-success">Entrada</a>
+<a href="{% url 'url_saida' %}" class="btn btn-danger">Saída</a>
+
+        {%if total < 0%}
+            <h3 style="color:red">Total em caixa: {{total|floatformat:2}}</h3>
+        {%elif total >= 0%}
+    <h3 style="color:green">Total em caixa: {{total|floatformat:2}}</h3>
+        {%else%}
+            <h3>Total em caixa: </h3>
+        {%endif%}
+
+<h3 style="color:blue">Soma da entrada: {{entrada|floatformat:2}}</h3>
+<div class="table-responsive">
+<table class="table">
+  <thead class="table-success">
+    <tr>
+      <th scope="col">Data</th>
+      <th scope="col">Descrição</th>
+      <th scope="col">Valor</th>
+      <th scope="col">Atualizar</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+     {%for e in todas_e%}
+      <th scope="row">{{e.data}}</th>
+      <td>{{e.nome}}</td>
+      <td>{{e.entrada}}</td>
+      <td>atualizar</td>
+    </tr>
+    {%endfor%}
+  </tbody>
+</table>
+<h3 style="color:orange">Soma da saída: {{saida|floatformat:2}}</h3>
+<table class="table">
+  <thead class="table-danger">
+    <tr>
+      <th scope="col">Data</th>
+      <th scope="col">Descrição</th>
+      <th scope="col">Valor</th>
+      <th scope="col">Atualizar</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+  {%for e in todas_s%}
+     <th scope="row">{{e.data}}</th>
+      <td>{{e.nome}}</td>
+      <td>{{e.saida}}</td>
+      <td>atualizar</td>
+    </tr>
+  {%endfor%}
+  </tbody>
+</table>
+</div>
+{% endblock %}
