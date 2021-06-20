@@ -7,7 +7,8 @@
   {% csrf_token %}
    {{ form|crispy }}
 
-	<button type="submit" class="btn btn-success">entrar</button>
+	<button type="submit" class="btn btn-success">Cadastrar</button>
 </div>
 </form>
+<a href="{% url 'url_boasvindas' %}" class="btn btn-success">voltar</a>
 {%endblock%}

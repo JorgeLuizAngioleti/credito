@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.db.models import Sum
-from .models import Entrada, Saida
-from .forms import EntradaForm, SaidaForm, NewUserForm
+from .models import Entrada
+from .forms import EntradaForm,  NewUserForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth import login
@@ -9,17 +9,9 @@ from django.contrib.auth import logout
 def home(request):
     context={}
     tudo_ent = Entrada.objects.all()
-    tudo_sai = Saida.objects.all()
-    ent = Entrada.objects.all().aggregate(e=Sum('entrada'))
-    sai = Saida.objects.all().aggregate(s=Sum('saida'))
-    context['entrada']=ent['e']
-    context['saida']= sai['s']
-    try:
-        context['total']=ent['e']-sai['s']
-    except:
-        pass
+    for i in tudo_ent:
+        print(i.valor,i.parcela)
     context['todas_e']=tudo_ent
-    context['todas_s']=tudo_sai
     return render(request,'app1/home.html', context)
 
 def boasvindas(request):
@@ -37,6 +29,7 @@ def logout1(request):
 
 @login_required
 def AddEntrada(request):
+    nome = request.user.first_name
     context={}
     if request.method == 'POST':
         form = EntradaForm(request.POST)
@@ -44,29 +37,18 @@ def AddEntrada(request):
             form.save()
             return redirect('url_home')
     else:
-        form = EntradaForm()
+        form = EntradaForm(initial={"nome":nome})
     context['form']=form
     context['identificacao'] = "Entrada"
-    return render(request,'app1/form.html',context)
-@login_required
-def AddSaida(request):
-    context={}
-    if request.method == 'POST':
-        form = SaidaForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('url_home')
-    else:
-        form = SaidaForm()
-    context['form']=form
-    context['identificacao']="Saída"
     return render(request,'app1/form.html',context)
 
 def register_request(request):
 	if request.method == "POST":
 		form = NewUserForm(request.POST)
 		if form.is_valid():
-			form.save()
+			s = form.save()
+			s.set_password(s.password)
+			s = form.save()
 			messages.success(request, "Registrado com sucesso!" )
 			return redirect("login")
 		messages.error(request, "Usuario não registrado, informações invalidas.")
