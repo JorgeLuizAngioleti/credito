@@ -2,7 +2,7 @@
 Empréstimos genérico
 
 #para  rodar o projeto no window
-$ git clone 
+$ git clone https://github.com/JorgeLuizAngioleti/credito.git
 cd credito
 python -m venv venv
 venv/Scripts/activate
