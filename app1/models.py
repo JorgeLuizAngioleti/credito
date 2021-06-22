@@ -39,6 +39,5 @@ class User(AbstractUser):
     cpf = CPFField('cpf')
    # banco = models.ForeignKey(Banco, on_delete=models.CASCADE)
     birth_date = models.DateField(null=True, blank=True)
-    #esc = models.ForeignKey(Escola, on_delete=models.CASCADE)
-    #per1 = models.BooleanField(u'Permição 1',default=False)
+   
 
