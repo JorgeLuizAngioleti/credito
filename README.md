@@ -13,8 +13,3 @@ Empréstimos genérico
 <p align="justify">python manage.py createsuperuser</p>
 <p align="justify">python manage.py runserver</p>
 <p align="justify">Acesse pelo navegador o endereço: http://127.0.0.1:8000/</p>
-<ul>
-  <li>primeiro item</li>
-  <li>segundo item</li>
-  <li>terceiro item</li>
-</ul
