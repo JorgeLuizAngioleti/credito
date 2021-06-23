@@ -1,0 +1,33 @@
+{% extends 'app1/base.html' %}
+{% load crispy_forms_tags %}
+{% block conteudo %}
+
+<h1>Escolha um plano</h1>
+
+<form method="post">
+<div class="form-group">
+
+{% csrf_token %}
+
+<p><label>Selecione um valor: </label>
+    <select name='valor' required>
+        <option value = "">-----Selecione-----</option>
+        {% for a in valores %}
+            <option values= {{ a.valor }}> {{ a.valor }} </option>
+        {% endfor %}
+    </select>
+</p>
+<br><label>Selecione o número de parcelas: </label>
+    <select name='parcelas' required>
+        <option value = "">-----Selecione-----</option>
+        {% for a in parcelas %}
+            <option values= {{ a.parcelas }}> {{ a.parcelas }} </option>
+        {% endfor %}
+    </select></br>
+
+	<button type="submit" class="btn btn-success">Enviar</button>
+</div>
+</form>
+<a href="{% url 'url_home' %}" class= "btn btn-primary">voltar</a>
+<a href="{% url 'url_home' %}" class="btn btn-success">Ver meus planos</a>
+{% endblock %}

@@ -12,7 +12,7 @@ class Banco(models.Model):
         return self.nome
 
 class Valor(models.Model):
-    valor = models.DecimalField(max_digits=12, decimal_places=2, default=0)
+    valor = models.CharField(u'Valor',max_length=10)
     def __str__(self):
         return str(self.valor)
 
@@ -22,15 +22,24 @@ class Parcelas(models.Model):
         return str(self.parcelas)
 
 class Entrada(models.Model):
+
     nome = models.CharField(u'Usuario',max_length=150)
     data = models.DateTimeField( default=timezone.now)
-    valor = models.ForeignKey(Valor, on_delete=models.CASCADE)
-    parcela = models.ForeignKey(Parcelas, on_delete=models.CASCADE)
-    fechou_negocio = models.BooleanField(u'comprou',default=False)
-
+    valor = models.CharField(u'Valor',max_length=10)
+    parcela = models.IntegerField(default=6)
+    fechou_negocio = models.BooleanField(u'Comprar o plano',default=False)
+    aprovado = models.BooleanField(u'comprou',default=False)
 
     def __str__(self):
         return self.nome
+
+    def calcular(self):
+        return "{:.2f}".format((float(self.valor)/float(self.parcela)))
+
+
+    def juros(self):
+        return float(self.valor)*0.04+float(self.valor)
+
 
 class User(AbstractUser):
     nome = models.CharField(u'Endereço', max_length=50)
@@ -39,5 +48,4 @@ class User(AbstractUser):
     cpf = CPFField('cpf')
    # banco = models.ForeignKey(Banco, on_delete=models.CASCADE)
     birth_date = models.DateField(null=True, blank=True)
-   
 
