@@ -3,7 +3,6 @@
 {% block conteudo %}
 <center><h2>{{identificacao}}</h2></center>
 {% if user.is_authenticated  %}<!-- if 1-->
-<h4>Olá {{ user.username }}!</h4>
 {%endif%}
 <form method="post">
     {%csrf_token%}

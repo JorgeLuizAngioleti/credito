@@ -41,9 +41,6 @@ def escolher(request):
         context['parcelas'] = parcela
         return render(request, 'app1/escolha.html', context)
 
-def capa(request):
-    context = {}
-    return render(request, 'app1/index.html', context)
 
 def logout1(request):
     logout(request)
@@ -51,7 +48,7 @@ def logout1(request):
 
 @login_required
 def AddEntrada(request):
-    nome = request.user.first_name+" "+request.user.last_name
+    nome = request.user.first_name
     context={}
     if request.method == 'POST':
         form = EntradaForm(request.POST)
