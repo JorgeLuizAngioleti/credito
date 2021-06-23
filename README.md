@@ -16,3 +16,8 @@ Empréstimos genérico
 <hr/>
 <h3>Para inserir os dado entre no admim com seu superuser</h3>
 <p align="justify">para acessar o admin url: http://127.0.0.1:8000/admin</p>
+<ul>
+  <li>acesse a tabela valor e adicione dados</li>
+  <li>acesse a tabela parcelas e adicione dados</li>
+  <li>volte a home para testar o app</li>
+</ul>
