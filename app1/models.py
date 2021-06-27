@@ -25,8 +25,8 @@ class Entrada(models.Model):
 
     nome = models.CharField(u'Usuario',max_length=150)
     data = models.DateTimeField( default=timezone.now)
-    valor = models.CharField(u'Valor',max_length=10)
-    parcela = models.IntegerField(default=6)
+    valor = models.ForeignKey(Valor, on_delete=models.CASCADE)
+    parcela = models.ForeignKey(Parcelas, on_delete=models.CASCADE)
     fechou_negocio = models.BooleanField(u'Comprar o plano',default=False)
     aprovado = models.BooleanField(u'comprou',default=False)
 
@@ -34,11 +34,13 @@ class Entrada(models.Model):
         return self.nome
 
     def calcular(self):
-        return "{:.2f}".format((float(self.valor)/float(self.parcela)))
+        return "{:.2f}".format((float(self.valor.valor)/float(self.parcela.parcelas)))
+
 
 
     def juros(self):
-        return float(self.valor)*0.04+float(self.valor)
+        return "{:.2f}".format(float(self.valor.valor)*0.04+float(self.valor.valor))
+
 
 
 class User(AbstractUser):

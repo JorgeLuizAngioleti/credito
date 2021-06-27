@@ -31,7 +31,7 @@
                         <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#contact">
 	                        {% if user.is_authenticated  %}<!-- if 1-->
 <h4>Olá {{ request.user.first_name}}!</h4>
-<a href="{% url 'escolher' %}" class="btn btn-success">Simular o crédito</a>
+<a href="{% url 'url_entrada' %}" class="btn btn-success">Simular o crédito</a>
 <a href="{% url 'logout' %}" class="btn btn-danger">Sair</a>
 {%else%}
 <a href="{% url 'login' %}" class="btn btn-primary">Login</a>

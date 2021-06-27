@@ -1,7 +1,7 @@
 *.idea
 *.sqlite
 *.pyc
-venv
+novo
 .DS_Stone
 media
 .env

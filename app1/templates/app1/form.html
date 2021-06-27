@@ -3,11 +3,16 @@
 {% block conteudo %}
 <center><h2>{{identificacao}}</h2></center>
 {% if user.is_authenticated  %}<!-- if 1-->
-{%endif%}
+
 <form method="post">
     {%csrf_token%}
     {{form|crispy}}
     <input type="submit" value="Enviar" class="btn btn-primary">
     <a href="{% url 'url_boasvindas' %}" class="btn btn-warning">Voltar</a>
 </form>
+<a href="{% url 'url_home' %}" class="btn btn-success">Ver meus planos</a>
+{% else %}
+<a href="{% url 'url_boasvindas' %}" class="btn btn-warning">Voltar</a>
+{%endif%}
+
 {%endblock%}

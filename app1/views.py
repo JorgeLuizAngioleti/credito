@@ -7,7 +7,9 @@ from django.contrib import messages
 from django.contrib.auth import login
 from django.contrib.auth import logout
 def home(request):
-    nome = request.user.first_name
+    if request.user.is_authenticated:
+        nome = request.user.first_name
+    else: nome = "você não está logado"
     context={}
     tudo_ent = Entrada.objects.filter(nome=nome)
     context['todas_e']=tudo_ent
@@ -16,7 +18,7 @@ def home(request):
 def boasvindas(request):
     context = {}
     return render(request, 'app1/boasvindas.html', context)
-
+@login_required
 def comprar(request, id):
     obj = Entrada.objects.get(pk=id)
     obj.fechou_negocio = True
@@ -24,22 +26,7 @@ def comprar(request, id):
     messages.success(request, "Solicitação de emprestimo realizada com sucesso!!")
     return redirect('url_home')
 
-def escolher(request):
-    nome = request.user.first_name
-    context = {}
-    valor = Valor.objects.all()
-    parcela = Parcelas.objects.all()
-    if request.method == 'POST':
-        val = request.POST.get('valor')
-        par = request.POST.get('parcelas')
-        print(val,par)
-        request.session['val'] = val
-        request.session['par'] = par
-        return redirect("url_entrada")
-    else:
-        context['valores'] = valor
-        context['parcelas'] = parcela
-        return render(request, 'app1/escolha.html', context)
+
 
 
 def logout1(request):
@@ -48,7 +35,8 @@ def logout1(request):
 
 @login_required
 def AddEntrada(request):
-    nome = request.user.first_name
+    if request.user.is_authenticated:
+        nome = request.user.first_name
     context={}
     if request.method == 'POST':
         form = EntradaForm(request.POST)
@@ -56,10 +44,7 @@ def AddEntrada(request):
             form.save()
             return redirect('url_home')
     else:
-        val = request.session['val']
-        par = request.session['par']
-        print("add",val)
-        form = EntradaForm(initial={"nome":nome,"valor":val,"parcela":par})
+        form = EntradaForm(initial={"nome":nome})
     context['form']=form
     context['identificacao'] = "Confira seus dados para finalizar"
     return render(request,'app1/form.html',context)
