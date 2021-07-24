@@ -14,5 +14,5 @@ Empréstimos genérico
 <p align="justify">python manage.py runserver</p>
 <p align="justify">para acessar a url: http://127.0.0.1:8000/</p>
 <hr/>
-<h3>Para inserir os dado entre no admim com seu superuser</h3>
+<h3>Para inserir os dado entre no admin com seu superuser</h3>
 <p align="justify">para acessar o admin url: http://127.0.0.1:8000/admin</p>
